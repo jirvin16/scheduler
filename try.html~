@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+
+<title>Jeremy's Schedule Maker</title>
+<link type="text/css" rel="stylesheet" href="try.css">
+
+</head>
+
+<body>
+
+<script>
+function myFunction()
+{
+      var x=document.getElementById("input").value;
+      var y=x.split("\n");
+      var z=new Array(y.length);
+      var i,k;
+      for(k=0;k<y.length;k++)
+      {
+            z[k]=new Array(3);
+            var str=y[k];//join the line
+            for(i=0;i<3;i++)
+            {
+                  var array=str.split(",")//split by comma into array
+                  z[k][i]=array[i];
+            }
+      }
+      var days=["M","T","W","R","F","S","U"];
+      var array=new Array(7);
+      for(i=0;i<7;i++)
+      {
+            array[i]=new Array(y.length);
+            for(k=0;k<y.length;k++)
+            {
+                  if(z[k][1].indexOf(days[i])!=-1)array[i][k]=(z[k][0]+": "+z[k][2]+"<br />");
+            }
+            document.getElementById(days[i]).innerHTML=(array[i].join("\b"));
+      }
+      return array;
+}
+function formatFunction()
+{
+      var array=myFunction();
+      
+}
+
+
+</script>
+
+<h1>Easy Scheduler</h1>
+
+<p id="Instructions">Insert your schedule in the textarea below. Make sure it is in the format "Event name, Days (MTWRFSU), Time1 - Time2". Do not enter a newline after the last event entry. Then press the Submit button below to create your formatted schedule! </p>
+<p>
+<textarea rows="10" cols="75" id="input">
+CS130E, R, 4:00PM - 6:50PM
+CS290B, T R, 11:00AM - 12:50PM
+Lunch with Fred, MTWRF, 11:30AM - 12:30PM
+</textarea>
+</p>
+<p>
+<button type="button" onclick="formatFunction()">Submit</button>
+</p>
+
+<p>
+Monday:<p id="M">
+</p><br>
+
+Tuesday:<p id="T">
+</p><br>
+
+Wednesday:<p id="W">
+</p><br>
+
+Thursday:<p id="R">
+</p><br>
+
+Friday:<p id="F">
+</p><br>
+
+Saturday:<p id="S">
+</p><br>
+
+Sunday:<p id="U">
+</p>
+
+
+
+</p>
+
+
+</body>
+</html>

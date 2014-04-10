@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+
+<title>Jeremy's Schedule Maker</title>
+<link type="text/css" rel="stylesheet" href="try.css">
+
+</head>
+
+<body>
+
+<script>
+function myFunction()
+{
+      var x=document.getElementById("input").value;
+      var y=x.split("\n");
+      var z=new Array(y.length);
+      var i,k;
+      for(k=0;k<y.length;k++)
+      {
+            z[k]=new Array(3);
+            var str=y[k];//join the line
+            for(i=0;i<3;i++)
+            {
+                  var array=str.split(",")//split by comma into array
+                  z[k][i]=array[i];
+            }
+      }
+      var days=["M","T","W","R","F","S","U"];
+      var array=new Array(7);
+      for(i=0;i<7;i++)
+      {
+            array[i]=new Array(y.length);
+            for(k=0;k<y.length;k++)
+            {
+                  if(z[k][1].indexOf(days[i])!=-1)array[i][k]=(z[k][0]+": "+z[k][2]+"<br />");
+            }
+            var string=array[i].join("\b");
+            document.getElementById(days[i]).innerHTML=string;
+      }
+      return array;
+}
+function formatFunction()
+{
+      var array=myFunction();
+      var array2=new Array(7);
+      var i,k;
+      for(i=0;i<7;i++)
+      {
+            array2[i]=(array[i].join("\b")).split("<br />");
+      }
+      var table=document.getElementById("myTable");
+      var rows=new Array(array[0].length);
+      for(i=0;i<array[0].length;i++)
+      {
+            rows[i]=table.insertRow(i+1);
+            for(k=0;k<7;k++)
+            {
+                  var cell=rows[i].insertCell(k);
+                  if(array2[k][i]==undefined)cell.innerHTML=" ";
+                  else cell.innerHTML=array2[k][i];
+            }
+      }
+}
+
+
+</script>
+
+<h1>Easy Scheduler</h1>
+
+<p id="Instructions">Insert your schedule in the textarea below. Make sure it is in the format "Event name, Days (MTWRFSU), Time1 - Time2". Do not enter a newline after the last event entry. Then press the Submit button below to create your formatted schedule! </p>
+<p>
+<textarea rows="10" cols="75" id="input">
+CS130E, R, 4:00PM - 6:50PM
+CS290B, T R, 11:00AM - 12:50PM
+Lunch with Fred, MTWRF, 11:30AM - 12:30PM
+</textarea>
+</p>
+<p>
+<button type="button" onclick="formatFunction()">Submit</button>
+</p>
+
+<p>
+Monday:<p id="M">
+</p><br>
+
+Tuesday:<p id="T">
+</p><br>
+
+Wednesday:<p id="W">
+</p><br>
+
+Thursday:<p id="R">
+</p><br>
+
+Friday:<p id="F">
+</p><br>
+
+Saturday:<p id="S">
+</p><br>
+
+Sunday:<p id="U">
+</p>
+
+<table id="myTable" width="100%" border="1">
+   <tr>
+     <td>MONDAY</td>
+     <td>TUESDAY</td>
+     <td>WEDNESDAY</td>
+     <td>THURSDAY</td>
+     <td>FRIDAY</td>
+     <td>SATURDAY</td>
+     <td>SUNDAY</td>
+   </tr>
+</table>
+
+</p>
+
+
+</body>
+</html>
